@@ -1,6 +1,7 @@
 # verebelyosztag-PENdroid
 
 Képek amik kellenek majd előre láthatólag:	
+
 							        -Ardmore kardja	;			
 							        -vas vért(páncél) ;
 								-gyógyítóka(hp re. gen.) ;
@@ -21,12 +22,14 @@ Képek amik kellenek majd előre láthatólag:
 								-pause gomb(folytatás, kilépés) ;
 								
 Animációk:
+
 		-csata a karakternek ;
 		-mozgás ;
 		-segítők ;
 		-ritmus alulra(szív középen + a |) ;
 			
 Menű:	
+
 		-GAME NAME ;
 		-játék(ha kivittük akkor játék újra kezdése) ;
 		-szintek:	-képek a szintekről, hogy melyik elérhető ;
