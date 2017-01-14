@@ -3,32 +3,32 @@
 Képek amik kellenek majd előre láthatólag:	
 							        -Ardmore kardja				
 							        -vas vért(páncél)
-											-gyógyítóka(hp re. gen.)
-											-varázsitóka(+hp x időre)
-											-segítőid(rnd(1,10hp;2,5 páncél))(mondjuk 2 féle segítő)
-											-5 féle elenfél + 1 fő boss, valami mitológiai lény lehetne mondjuk, sárkány vagy idk.
-											-szinteknek megfelelő falak, ha ritmus on akkor világító aljzat
-											-ajtó a szintről való kijutáshoz
-											-hp teli/üres/fél
-											-armor teli/üres/fél
-											-egy hely amiből megtudod idézni a segítőidet
-											-segítőidnek blip, hogy az mutassa meg, hogy hány darab segítőd van
-											-menü
-											-akadályok
-											-inventory valahova(négyszögek abba mennek bele az ikonok(varázsítóka, gyógyítóka -> arra katt felhasznál ekkor neked 2mp szünet még megissza ()+ valami effect a képernyőre)))
-											-kincses láda(+ütés, +hp, varázsítóka, gyógyítóka)
+								-gyógyítóka(hp re. gen.)
+								-varázsitóka(+hp x időre)
+								-segítőid(rnd(1,10hp;2,5 páncél))(mondjuk 2 féle segítő)
+								-5 féle elenfél + 1 fő boss, valami mitológiai lény lehetne mondjuk, sárkány vagy idk.
+								-szinteknek megfelelő falak, ha ritmus on akkor világító aljzat
+								-ajtó a szintről való kijutáshoz
+								-hp teli/üres/fél
+								-armor teli/üres/fél
+								-egy hely amiből megtudod idézni a segítőidet
+								-segítőidnek blip, hogy az mutassa meg, hogy hány darab segítőd van
+								-menü
+								-akadályok
+								-inventory valahova(négyszögek abba mennek bele az ikonok(varázsítóka, gyógyítóka -> arra katt felhasznál ekkor neked 2mp szünet még megissza ()+ valami effect a képernyőre)))
+								-kincses láda(+ütés, +hp, varázsítóka, gyógyítóka)
 Animációk:	-csata a karakternek
-			-mozgás
-			-segítők
-			-ritmus alulra(szív középen + a |)
+		-mozgás
+		-segítők
+		-ritmus alulra(szív középen + a |)
 			
 
 Menű:	GAME NAME
 		-játék(ha kivittük akkor játék újra kezdése)
 		-szintek:	-képek a szintekről, hogy melyik elérhető
-					-játék újra kezdése:	-biztos? y/n
+				-játék újra kezdése:	-biztos? y/n
 		-beállítások:	-zene off
-						-hang off
+				-hang off
 		-kilépés
 (háttér az utolsó pozició képe elmosva)
 
