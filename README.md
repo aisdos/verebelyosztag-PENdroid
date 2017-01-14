@@ -31,7 +31,9 @@ Menű:	GAME NAME
 		-kilépés
 (háttér az utolsó pozició képe elmosva)
 
-Játékmenet:	-1: 	történet: 	Ardmore parancsára hadjáratott indítasz az emberíség ellen azzal a célal, hogy leigázd őket és szolgaságba
+Játékmenet:	
+
+			-1: 	történet: 	Ardmore parancsára hadjáratott indítasz az emberíség ellen azzal a célal, hogy leigázd őket és szolgaságba
 								taszísd őket.Ugyan akkor próbálkozásaid közben, nagy mennyiségű ellen állásba ütközöl.Teljesísd be Ardmore 
 								parancsát, különben ő veszi kezei közé az irányítást!
 								Kép: Armodrról és rólad egy kép, ahogy Armodr ki irányít a csarnokból, hadba irányítva téged.
