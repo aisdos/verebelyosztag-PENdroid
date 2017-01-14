@@ -22,7 +22,6 @@ Animációk:	-csata a karakternek
 		-segítők
 		-ritmus alulra(szív középen + a |)
 			
-
 Menű:	GAME NAME
 		-játék(ha kivittük akkor játék újra kezdése)
 		-szintek:	-képek a szintekről, hogy melyik elérhető
