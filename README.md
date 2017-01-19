@@ -6,57 +6,48 @@ Képek amik kellenek majd előre láthatólag:
 							        -vas vért(páncél) ;
 								-gyógyítóka(hp re. gen.) ;
 								-varázsitóka(+hp x időre)  ;
-								-segítőid(rnd(1,10hp;2,5 páncél))(mondjuk 2 féle segítő) ;
 								-5 féle elenfél + 1 fő boss, valami mitológiai lény lehetne mondjuk, sárkány vagy idk. ;
-								-szinteknek megfelelő falak, ha ritmus on akkor világító aljzat ;
+								-szinteknek megfelelő falak ;
 								-ajtó a szintről való kijutáshoz ;
 								-itt fal törés helyett kulcsok + ajtók a kincses ládákhoz stb ;
 								-hp teli/üres/fél ;
-								-armor teli/üres/fél ;
-								-egy hely amiből megtudod idézni a segítőidet ;
-								-segítőidnek blip, hogy az mutassa meg, hogy hány darab segítőd van
-								-menü ;
 								-akadályok ;
 								-inventory valahova(négyszögek abba mennek bele az ikonok(varázsítóka, gyógyítóka -> arra katt felhasznál ekkor neked 2mp szünet még megissza ()+ valami effect a képernyőre))) ;
 								-kincses láda(+ütés, +hp, varázsítóka, gyógyítóka)
 								-pause gomb(folytatás, kilépés) ;
+								-minimap
 								
 Animációk:
 
-		-csata a karakternek ;
-		-mozgás ;
-		-segítők ;
-		-ritmus alulra(szív középen + a |) ;
+		Lehetőleg mindent animáljunk amit csak tudunk.
 			
 Menű:	
-
+	
 		-GAME NAME ;
 		-játék(ha kivittük akkor játék újra kezdése) ;
-		-szintek:	-képek a szintekről, hogy melyik elérhető ;
+		-szintek:	-képek a szintekről, hogy melyik elérhető ;(map mentése, pos, hp, ellenfelek, kulcsok stb)
 				-játék újra kezdése:	-biztos? y/n ;
-		-beállítások:	-zene off ;
-				-hang off ;
 		-kilépés
 (háttér az utolsó pozició képe elmosva)
 
 Játékmenet:	
 
-			-1: 	történet: 	Ardmore parancsára hadjáratott indítasz az emberíség ellen azzal a célal, hogy leigázd őket és szolgaságba
-								taszísd őket.Ugyan akkor próbálkozásaid közben, nagy mennyiségű ellen állásba ütközöl.Teljesísd be Ardmore 
-								parancsát, különben ő veszi kezei közé az irányítást!
-								Kép: Armodrról és rólad egy kép, ahogy Armodr ki irányít a csarnokból, hadba irányítva téged.
+			-1: 	történet: 	Ardmore és hű segítője, hadjáratott inditottak a föld ellen...Szövetséges csapatid sikeresen feltartoztatják
+								már vagy 2 hónapja, de már nem bírják sokáig...A király parancsára, eredj a szúrdokhoz, hol le merészkedhetsz a pokolba.
+								Ez után 2 napi járásra a föld  alja felé, találkozni fogsz egy táborral...Ott kérhetsz majd pár bajtársat...
+								Velik eredj le Ardmore barlangába, és végezz vele, vagy a királyság...Az ország...A világ elveszik, és e szörnyeteg keze közé kerül..
+								
 							
-			-2: 	le spawnolsz nincs segítséged, van egy kardod Ardmore től és azzal jampiskodsz. 50 hp-d van, random generált világ zárt falakkal
+			-2: 	Történet:	A bajtársaid már mind elestek a a csatába...De te nem állhatsz meg..Tovább kell mened vagy a föld elpusztul!
+					100hp 0 armor
 					
 					összesen 5db random generált világ a végén a nagy csata egy viszonylag nyílt világban.
-					Ekkora már össze tudtál szedni + 20-25 segítőt + 100hp-t és 100armort
+					 100+hp-t és 100armort
 					
-					Út: pokolból -> felszínre e szerint a szintek styla is
+					Út: felszínről -> pokolba e szerint a szintek styla is
 							
 			
 			-3:		
-					történet vége:	A parancsot sikeresen végre hajtotad.Ardmore elégedett...Jöttére 5 nap múlva számítsatok...Pirgadatkor, kelett felől!
-									Kép: egy kép a felszínről mondjuk egy várról
+					történet vége:	Ardmore, és társa halott...A világ megmenekült, egyenlőre; téged ki tüntetnek, és regéket fognak rólad írni.Ne feledd ezt a napot
+									mikor végeztél Ardmorral...
 									
-Kép style nek kb mint az Overlord, fontos, mi vagyunk a gonoszok és mi akarjuk elfoglalni a felszínt, nem fordítva, szóval mindennek ilyen gonosznak kell lennie, pályák stílusa ilyen pokol szerű sötétebb, piros
-lehetne.De ezt rád bízom.
