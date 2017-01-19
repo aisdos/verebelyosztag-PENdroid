@@ -13,7 +13,9 @@ Képek amik kellenek majd előre láthatólag:
 								-hp teli/üres/fél ;
 								-akadályok ;
 								-inventory valahova(négyszögek abba mennek bele az ikonok(varázsítóka,
-								gyógyítóka -> arra katt felhasznál ekkor neked 2mp szünet még megissza ()+ valami effect a képernyőre))) ;
+								gyógyítóka -> arra katt felhasznál ekkor neked 2mp szünet még megissza 
+								
+								()+ valami effect a képernyőre))) ;
 								-kincses láda(+ütés, +hp, varázsítóka, gyógyítóka)
 								-pause gomb(folytatás, kilépés) ;
 								-minimap
