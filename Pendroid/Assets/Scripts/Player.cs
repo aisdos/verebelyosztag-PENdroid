@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
 	private Rigidbody2D rig;
-	[SerializeField] private Animator anim;					//[SerializeField] = Szerkesztőben láthatóvá teszi a privát változót
+	[SerializeField] private Animator anim;					//	[SerializeField] = Szerkesztőben láthatóvá teszi a privát változót
 	[SerializeField] private GameObject spriteTrans;
 	[SerializeField] private GameObject sprite;
 	[SerializeField] private Button dpad_up;
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	private RaycastHit2D hit_left;
 	private RaycastHit2D hit_down;
 	private RaycastHit2D hit_right;
+	private float rythm = 0.5f;
 
 	void Start () {
 		rig = GetComponent<Rigidbody2D> ();
@@ -76,36 +77,36 @@ public class Player : MonoBehaviour {
 	//		Mozgás
 	//
 	void Move(int dir) {
-		if (dir == 1) {													//Bal
-			//Karakter balra nézése
-			sprite.transform.rotation = Quaternion.Euler(0, 0, 0);
-			anim.SetInteger ("dir", 1);
-			anim.SetBool ("move", true);
+		Vector2 move = Vector2.zero;
+		//if (Rythm.NextBeat() < Rythm.BeatDelay*rythm) {
+			if (dir != 3) {
+				if (dir != 0) {
+					sprite.transform.rotation = Quaternion.Euler (0, 0, 0);
+					anim.SetInteger ("dir", dir);
+					anim.SetBool ("move", true);
 
-			if (hit_left.collider == null)
-				rig.MovePosition(rig.position + Vector2.left);
-		} else if (dir == 2) {											//Fel
-			sprite.transform.rotation = Quaternion.Euler(0, 0, 0);
-			anim.SetInteger ("dir", 2);
-			anim.SetBool ("move", true);
+					if (dir == 1) {
+						if (hit_left.collider == null)
+							move = Vector2.left;
+					} else if (dir == 2) {
+						if (hit_up.collider == null)
+							move = Vector2.up;
+					} else if (dir == 4) {
+						if (hit_down.collider == null)
+							move = Vector2.down;
+					}
+				}
+			} 
+			else {
+				sprite.transform.rotation = Quaternion.Euler (0, 180, 0);
+				anim.SetInteger ("dir", 1);
+				anim.SetBool ("move", true);
 
-			if (hit_up.collider == null)
-				rig.MovePosition(rig.position + Vector2.up);
-		} else if (dir == 3) {											//Jobb
-			//Karakter jobbra nézése
-			sprite.transform.rotation = Quaternion.Euler(0, 180, 0);
-			anim.SetInteger ("dir", 1);
-			anim.SetBool ("move", true);
+				if (hit_right.collider == null)
+					move = Vector2.right;
+			}
+		//}
 
-			if (hit_right.collider == null)
-				rig.MovePosition(rig.position + Vector2.right);
-		} else if (dir == 4) {											//Le
-			sprite.transform.rotation = Quaternion.Euler(0, 0, 0);
-			anim.SetInteger ("dir", 4);
-			anim.SetBool ("move", true);
-
-			if (hit_down.collider == null)
-				rig.MovePosition(rig.position + Vector2.down);
-		}
+		rig.MovePosition (rig.position + move);
 	}
 }
