@@ -5,12 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyBase : MonoBehaviour {
 
-	private Rigidbody2D rig;
-	private Rigidbody2D player;
-	private bool flipCheck = false;
-	private Vector2 lastMove = Vector2.zero;
+	public int health;
+	public bool flipCheck = false;
 	public MobType type;
 	[SerializeField] private GameObject spriteTrans;
+	private Vector2 lastMove = Vector2.zero;
+	private Rigidbody2D rig;
+	private Rigidbody2D player;
+	private RaycastHit2D hit_up;
+	private RaycastHit2D hit_left;
+	private RaycastHit2D hit_down;
+	private RaycastHit2D hit_right;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +27,29 @@ public class EnemyBase : MonoBehaviour {
 	void Update() {
 		spriteTrans.transform.position = Vector2.MoveTowards (spriteTrans.transform.position, gameObject.transform.position, Time.deltaTime * 4);
 	}
-	
+
+	void FixedUpdate() {
+		hit_up = Physics2D.Raycast (rig.position + (new Vector2(0, 0.51f)), Vector2.up, 0.25f);
+		hit_left = Physics2D.Raycast (rig.position + (new Vector2(-0.51f, 0)), Vector2.left,0.25f);
+		hit_right = Physics2D.Raycast (rig.position + (new Vector2(0.51f, 0)), Vector2.right,0.25f);
+		hit_down = Physics2D.Raycast (rig.position + (new Vector2(0, -0.51f)), Vector2.down,0.25f);
+
+		Debug.DrawRay (rig.position + (new Vector2(0, 0.51f)), Vector2.up/4, Color.red);
+		Debug.DrawRay (rig.position + (new Vector2(-0.51f, 0)), Vector2.left/4, Color.blue);
+		Debug.DrawRay (rig.position + (new Vector2(0.51f, 0)), Vector2.right/4, Color.green);
+		Debug.DrawRay (rig.position + (new Vector2(0, -0.51f)), Vector2.down/4, Color.yellow);
+	}
+
+	//
+	//		Sebződés
+	//
+	public void Damage(int dmg) {
+		health -= dmg;
+		if (health <= 0) {
+			Destroy (gameObject);
+		}
+	}
+
 	IEnumerator FirstMove() {
 		yield return new WaitForSeconds (Rythm.BeginDelay);
 		if (type == MobType.Follow)
@@ -45,12 +72,20 @@ public class EnemyBase : MonoBehaviour {
 			if (lastMove == Vector2.zero)
 				lastMove = Vector2.right;
 		}
-		if (lastMove == Vector2.left)
-			move = Vector2.right;
-		else
-			move = Vector2.left;
+		if (lastMove == Vector2.left) {
+			if (hit_right.collider == null)
+				move = Vector2.right;
+			else if (hit_right.collider.GetComponent<Player> () != null)
+				hit_right.collider.GetComponent<Player> ().Damage (1);
+		} else {
+			if (hit_left.collider == null)
+				move = Vector2.left;
+			else if (hit_left.collider.GetComponent<Player> () != null)
+				hit_left.collider.GetComponent<Player> ().Damage (1);
+		}
 
-		lastMove = move;
+		if (move != Vector2.zero)
+			lastMove = move;
 		rig.MovePosition (rig.position + move);
 
 		yield return new WaitForSeconds (Rythm.BeatDelay);
@@ -69,12 +104,20 @@ public class EnemyBase : MonoBehaviour {
 			if (lastMove == Vector2.zero)
 				lastMove = Vector2.down;
 		}
-		if (lastMove == Vector2.up)
-			move = Vector2.down;
-		else
-			move = Vector2.up;
+		if (lastMove == Vector2.up) {
+			if (hit_down.collider == null)
+				move = Vector2.down;
+			else if (hit_down.collider.GetComponent<Player> () != null)
+				hit_down.collider.GetComponent<Player> ().Damage (1);
+		} else {
+			if (hit_up.collider == null)
+				move = Vector2.up;
+			else if (hit_up.collider.GetComponent<Player> () != null)
+				hit_up.collider.GetComponent<Player> ().Damage (1);
+		}
 
-		lastMove = move;
+		if (move != Vector2.zero)
+			lastMove = move;
 		rig.MovePosition (rig.position + move);
 
 		yield return new WaitForSeconds (Rythm.BeatDelay);
@@ -83,6 +126,7 @@ public class EnemyBase : MonoBehaviour {
 
 	//
 	//		Követés
+	//		NE KÉRDEZD HOGY DE MŰKÖDIK!!! - Norbi
 	//
 	IEnumerator Follow() {
 		Vector2 move = Vector2.zero;
@@ -90,27 +134,109 @@ public class EnemyBase : MonoBehaviour {
 			flipCheck = true;
 		else
 			flipCheck = false;
+
 		if (!flipCheck) {
-			if (rig.position.x > player.position.x)
-				move = Vector2.left;
-			else if (rig.position.x < player.position.x)
-				move = Vector2.right;
+			if (rig.position.x > player.position.x) {
+				if (hit_left.collider == null) {
+					move = Vector2.left;
+					//flipCheck = false;
+				}
+				else {
+					if (rig.position.y > player.position.y) {
+						if (hit_down.collider == null) {
+							move = Vector2.down;
+							//flipCheck = true;
+						}
+					} else if (rig.position.y < player.position.y) {
+						if (hit_up.collider == null) {
+							move = Vector2.up;
+							//flipCheck = true;
+						}
+					}
+				}
+			} else if (rig.position.x < player.position.x) {
+				if (hit_right.collider == null) {
+					move = Vector2.right;
+					//flipCheck = false;
+				}
+				else {
+					if (rig.position.y > player.position.y) {
+						if (hit_down.collider == null) {
+							move = Vector2.down;
+							//flipCheck = true;
+						}
+					} else if (rig.position.y < player.position.y) {
+						if (hit_up.collider == null) {
+							move = Vector2.up;
+							//flipCheck = true;
+						}
+					}
+				}
+			}
 			else {
-				if (rig.position.y > player.position.y)
-					move = Vector2.down;
-				else
-					move = Vector2.up;
+				if (rig.position.y > player.position.y) {
+					if (hit_down.collider == null) {
+						move = Vector2.down;
+						//flipCheck = true;
+					}
+				} else if (rig.position.y < player.position.y) {
+					if (hit_up.collider == null) {
+						move = Vector2.up;
+						//flipCheck = true;
+					}
+				}
 			}
 		} else {
-			if (rig.position.y > player.position.y)
-				move = Vector2.down;
-			else if (rig.position.y < player.position.y)
-				move = Vector2.up;
+			if (rig.position.y > player.position.y) {
+				if (hit_down.collider == null) {
+					move = Vector2.down;
+					//flipCheck = true;
+				}
+				else {
+					if (rig.position.x > player.position.x) {
+						if (hit_left.collider == null) {
+							move = Vector2.left;
+							//flipCheck = false;
+						}
+					} else if (rig.position.x < player.position.x) {
+						if (hit_right.collider == null) {
+							move = Vector2.right;
+							//flipCheck = false;
+						}
+					}
+				}
+			}
+			else if (rig.position.y < player.position.y) {
+				if (hit_up.collider == null) {
+					move = Vector2.up;
+					//flipCheck = true;
+				}
+				else {
+					if (rig.position.x > player.position.x) {
+						if (hit_left.collider == null) {
+							move = Vector2.left;
+							//flipCheck = false;
+						}
+					} else if (rig.position.x < player.position.x) {
+						if (hit_right.collider == null) {
+							move = Vector2.right;
+							//flipCheck = false;
+						}
+					}
+				}
+			}
 			else {
-				if (rig.position.x > player.position.x)
-					move = Vector2.left;
-				else
-					move = Vector2.right;
+				if (rig.position.x > player.position.x) {
+					if (hit_left.collider == null) {
+						move = Vector2.left;
+						//flipCheck = false;
+					}
+				} else if (rig.position.x < player.position.x) {
+					if (hit_right.collider == null) {
+						move = Vector2.right;
+						//flipCheck = false;
+					}
+				}
 			}
 		}
 

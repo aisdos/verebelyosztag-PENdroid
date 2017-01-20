@@ -14,13 +14,20 @@ public class Player : MonoBehaviour {
 	[SerializeField] private Button dpad_down;
 	[SerializeField] private Button dpad_left;
 	[SerializeField] private Button dpad_right;
+	[SerializeField] private GameObject health_0;
+	[SerializeField] private GameObject health_1;
+	[SerializeField] private GameObject health_2;
+	[SerializeField] private GameObject healthBar;
 	private RaycastHit2D hit_up;
 	private RaycastHit2D hit_left;
 	private RaycastHit2D hit_down;
 	private RaycastHit2D hit_right;
 	private float rythm = 0.5f;
+	public int health;
+	public int maxHealth = 6;
 
 	void Start () {
+		health = maxHealth;
 		rig = GetComponent<Rigidbody2D> ();
 		dpad_up.onClick.AddListener (() => {
 			Move(2);
@@ -34,10 +41,14 @@ public class Player : MonoBehaviour {
 		dpad_right.onClick.AddListener (() => {
 			Move(3);
 		});
+		UpdateHealthBar ();
 	}
 
 	void Update() {
-		//Mégha ez itt működne - Norbi
+		//
+		//	Mégha ez itt működne - Norbi
+		//	Már működik - Norbi
+		//
 		if (!anim.GetCurrentAnimatorStateInfo (0).IsName("idle_left") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_down") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_up"))
 			anim.SetBool ("move", false);
 		
@@ -45,6 +56,11 @@ public class Player : MonoBehaviour {
 		//	Karakter képének mozgatása
 		//
 		spriteTrans.transform.position = Vector2.MoveTowards (spriteTrans.transform.position, gameObject.transform.position, Time.deltaTime * 4);
+
+		//
+		//	Életerő értékének intervallumának megadása
+		//
+		health = Mathf.Clamp (health, 0, maxHealth);
 	}
 
 	//
@@ -74,11 +90,76 @@ public class Player : MonoBehaviour {
 	}
 
 	//
+	//		Sebződés
+	//
+	public void Damage(int dmg) {
+		health -= dmg;
+		if (health <= 0) {
+			Die ();
+		}
+		UpdateHealthBar ();
+	}
+
+	//
+	//		GameOver
+	//
+	public void Die() {
+		UIManager.DeadUI ();
+		sprite.SetActive (false);
+		gameObject.GetComponent<BoxCollider2D> ().enabled = false;
+	}
+
+	//
+	//		Életerőcsík Updateolása
+	//		Ne is nézz erre még szépíteni kell
+	//		- Norbi -
+	//
+	public void UpdateHealthBar() {
+		GameObject[] oldIcons = GameObject.FindGameObjectsWithTag ("HealthIcon");
+		foreach (GameObject g in oldIcons) {
+			Destroy (g);
+		}
+		float tmpHealth = health;
+		bool needHalf = false;
+		int i = 0;
+		int j = 0;
+		if (health > 0) {
+			if (health % 2 != 0) {
+				tmpHealth++;
+				needHalf = true;
+			}
+			for (j = 0; j < (maxHealth - tmpHealth) / 2; j++) {
+				GameObject tmp = (GameObject)Instantiate (health_0, Vector2.zero, Quaternion.identity, healthBar.transform);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				i++;
+			}
+			if (needHalf) {
+				GameObject tmp = (GameObject)Instantiate (health_1, Vector2.zero, Quaternion.identity, healthBar.transform);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				i++;
+				tmpHealth -= 2;
+			}
+			for (j = 0; j < tmpHealth / 2; j++) {
+				GameObject tmp = (GameObject)Instantiate (health_2, Vector2.zero, Quaternion.identity, healthBar.transform);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				i++;
+			}
+		} else {
+			for (j = 0; j < maxHealth / 2; j++) {
+				GameObject tmp = (GameObject)Instantiate (health_0, Vector2.zero, Quaternion.identity, healthBar.transform);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				i++;
+			}
+		}
+	}
+
+	//
 	//		Mozgás
 	//
 	void Move(int dir) {
-		Vector2 move = Vector2.zero;
-		//if (Rythm.NextBeat() < Rythm.BeatDelay*rythm) {
+		if (health > 0) {
+			Vector2 move = Vector2.zero;
+			//if (Rythm.NextBeat() < Rythm.BeatDelay*rythm) {
 			if (dir != 3) {
 				if (dir != 0) {
 					sprite.transform.rotation = Quaternion.Euler (0, 0, 0);
@@ -88,25 +169,33 @@ public class Player : MonoBehaviour {
 					if (dir == 1) {
 						if (hit_left.collider == null)
 							move = Vector2.left;
+						else if (hit_left.collider.GetComponent<EnemyBase> () != null)
+							hit_left.collider.GetComponent<EnemyBase> ().Damage (1);
 					} else if (dir == 2) {
 						if (hit_up.collider == null)
 							move = Vector2.up;
+						else if (hit_up.collider.GetComponent<EnemyBase> () != null)
+							hit_up.collider.GetComponent<EnemyBase> ().Damage (1);
 					} else if (dir == 4) {
 						if (hit_down.collider == null)
 							move = Vector2.down;
+						else if (hit_down.collider.GetComponent<EnemyBase> () != null)
+							hit_down.collider.GetComponent<EnemyBase> ().Damage (1);
 					}
 				}
-			} 
-			else {
+			} else {
 				sprite.transform.rotation = Quaternion.Euler (0, 180, 0);
 				anim.SetInteger ("dir", 1);
 				anim.SetBool ("move", true);
 
 				if (hit_right.collider == null)
 					move = Vector2.right;
+				else if (hit_right.collider.GetComponent<EnemyBase> () != null)
+					hit_right.collider.GetComponent<EnemyBase> ().Damage (1);
 			}
-		//}
+			//}
 
-		rig.MovePosition (rig.position + move);
+			rig.MovePosition (rig.position + move);
+		}
 	}
 }
