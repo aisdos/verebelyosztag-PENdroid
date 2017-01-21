@@ -89,6 +89,16 @@ public class Player : MonoBehaviour {
 			print ("Le: " + hit_down.collider.name);
 	}
 
+    //
+    //      Healelés
+    //
+    public void Heal(int hp)
+    {
+        health += hp;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        UpdateHealthBar();
+    }
+
 	//
 	//		Sebződés
 	//
@@ -167,35 +177,43 @@ public class Player : MonoBehaviour {
 					anim.SetBool ("move", true);
 
 					if (dir == 1) {
-						if (hit_left.collider == null)
-							move = Vector2.left;
-						else if (hit_left.collider.GetComponent<EnemyBase> () != null)
-							hit_left.collider.GetComponent<EnemyBase> ().Damage (1);
-					} else if (dir == 2) {
-						if (hit_up.collider == null)
-							move = Vector2.up;
-						else if (hit_up.collider.GetComponent<EnemyBase> () != null)
-							hit_up.collider.GetComponent<EnemyBase> ().Damage (1);
+                        if (hit_left.collider == null)
+                            move = Vector2.left;
+                        else
+                            CheckHit(hit_left);
+                    } else if (dir == 2) {
+                        if (hit_up.collider == null)
+                            move = Vector2.up;
+                        else
+                            CheckHit(hit_up);
 					} else if (dir == 4) {
-						if (hit_down.collider == null)
-							move = Vector2.down;
-						else if (hit_down.collider.GetComponent<EnemyBase> () != null)
-							hit_down.collider.GetComponent<EnemyBase> ().Damage (1);
-					}
+                        if (hit_down.collider == null)
+                            move = Vector2.down;
+                        else
+                            CheckHit(hit_down);
+                    }
 				}
 			} else {
 				sprite.transform.rotation = Quaternion.Euler (0, 180, 0);
 				anim.SetInteger ("dir", 1);
 				anim.SetBool ("move", true);
 
-				if (hit_right.collider == null)
-					move = Vector2.right;
-				else if (hit_right.collider.GetComponent<EnemyBase> () != null)
-					hit_right.collider.GetComponent<EnemyBase> ().Damage (1);
+                if (hit_right.collider == null)
+                    move = Vector2.right;
+                else
+                    CheckHit(hit_right);
 			}
 			//}
 
 			rig.MovePosition (rig.position + move);
 		}
 	}
+
+    void CheckHit(RaycastHit2D hit)
+    {
+        if (hit.collider.GetComponent<EnemyBase>() != null)
+            hit.collider.GetComponent<EnemyBase>().Damage(1);
+        else if (hit.collider.GetComponent<Chest>() != null)
+            hit.collider.GetComponent<Chest>().Open();
+    }
 }
