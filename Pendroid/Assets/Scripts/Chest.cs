@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour {
 
-    [SerializeField] private Animator anim;
-    [SerializeField] private bool key;
+    [SerializeField] private Animator baseAnim;
+	[SerializeField] private Animator itemAnim;
+	[SerializeField] private Animator doorAnim;
+	[SerializeField] private bool key;
 
 	public void Open()
     {
@@ -13,14 +15,18 @@ public class Chest : MonoBehaviour {
         {
             if (Inventory.GetKey() > 0)
             {
-                anim.SetBool("open", true);
+				baseAnim.SetBool("open", true);
+				doorAnim.SetBool("open", true);
+				itemAnim.SetInteger ("item", 1);
                 Inventory.AddPotion(1);
                 Inventory.RemoveKey(1);
             }
         }
         else
         {
-            anim.SetBool("open", true);
+			baseAnim.SetBool("open", true);
+			doorAnim.SetBool("open", true);
+			itemAnim.SetInteger ("item", 1);
             Inventory.AddPotion(1);
         }
     }
