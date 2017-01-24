@@ -35,8 +35,8 @@ Menű:
 
 Játékmenet:	
 
-			-1: 	történet: 	Ardmore és hű segítője, hadjáratott inditottak a föld ellen...Szövetséges csapatid sikeresen feltartoztatják
-								már vagy 2 hónapja, de már nem bírják sokáig...A király parancsára, eredj a szúrdokhoz, hol le merészkedhetsz a pokolba.
+			-1: 	történet: 	Ardmore és hű segítője, hadjáratott inditottak a föld ellen...Szövetséges csapataid sikeresen feltartoztatják
+								őket már vagy 2 hónapja, de már nem bírják sokáig...A király parancsára, eredj a szúrdokhoz, ahol le merészkedhetsz a pokolba.
 								Ez után 2 napi járásra a föld  alja felé, találkozni fogsz egy táborral...Ott kérhetsz majd pár bajtársat...
 								Velik eredj le Ardmore barlangába, és végezz vele, vagy a királyság...Az ország...A világ elveszik, és e szörnyeteg keze közé kerül..
 								
@@ -51,6 +51,6 @@ Játékmenet:
 							
 			
 			-3:		
-					történet vége:	Ardmore, és társa halott...A világ megmenekült, egyenlőre; téged ki tüntetnek, és regéket fognak rólad írni.Ne feledd ezt a napot
+					történet vége:	Ardmore, és társai halottak...A világ megmenekült, téged ki tüntetnek, és regéket fognak rólad írni.Ne feledd ezt a napot
 									mikor végeztél Ardmorral...
 									
