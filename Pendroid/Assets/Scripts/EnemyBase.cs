@@ -8,7 +8,9 @@ public class EnemyBase : MonoBehaviour {
 	public int health;
 	public bool flipCheck = false;
 	public MobType type;
+	public int damage = 1;
 	[SerializeField] private GameObject spriteTrans;
+	[SerializeField] private GameObject drop;
 	private Vector2 lastMove = Vector2.zero;
 	private Rigidbody2D rig;
 	private Rigidbody2D player;
@@ -46,6 +48,9 @@ public class EnemyBase : MonoBehaviour {
 	public void Damage(int dmg) {
 		health -= dmg;
 		if (health <= 0) {
+			if (drop != null) {
+				Instantiate (drop, gameObject.transform.position, gameObject.transform.rotation);
+			}
 			Destroy (gameObject);
 		}
 	}
@@ -76,12 +81,12 @@ public class EnemyBase : MonoBehaviour {
 			if (hit_right.collider == null)
 				move = Vector2.right;
 			else if (hit_right.collider.GetComponent<Player> () != null)
-				hit_right.collider.GetComponent<Player> ().Damage (1);
+				hit_right.collider.GetComponent<Player> ().Damage (damage);
 		} else {
 			if (hit_left.collider == null)
 				move = Vector2.left;
 			else if (hit_left.collider.GetComponent<Player> () != null)
-				hit_left.collider.GetComponent<Player> ().Damage (1);
+				hit_left.collider.GetComponent<Player> ().Damage (damage);
 		}
 
 		if (move != Vector2.zero)
@@ -108,12 +113,12 @@ public class EnemyBase : MonoBehaviour {
 			if (hit_down.collider == null)
 				move = Vector2.down;
 			else if (hit_down.collider.GetComponent<Player> () != null)
-				hit_down.collider.GetComponent<Player> ().Damage (1);
+				hit_down.collider.GetComponent<Player> ().Damage (damage);
 		} else {
 			if (hit_up.collider == null)
 				move = Vector2.up;
 			else if (hit_up.collider.GetComponent<Player> () != null)
-				hit_up.collider.GetComponent<Player> ().Damage (1);
+				hit_up.collider.GetComponent<Player> ().Damage (damage);
 		}
 
 		if (move != Vector2.zero)
@@ -137,105 +142,102 @@ public class EnemyBase : MonoBehaviour {
 
 		if (!flipCheck) {
 			if (rig.position.x > player.position.x) {
-				if (hit_left.collider == null) {
+				if (hit_left.collider == null)
 					move = Vector2.left;
-					//flipCheck = false;
-				}
+				else if (hit_left.collider.GetComponent<Player> () != null)
+					hit_left.collider.GetComponent<Player> ().Damage (damage);
 				else {
 					if (rig.position.y > player.position.y) {
-						if (hit_down.collider == null) {
+						if (hit_down.collider == null)
 							move = Vector2.down;
-							//flipCheck = true;
-						}
+						else if (hit_down.collider.GetComponent<Player> () != null)
+							hit_down.collider.GetComponent<Player> ().Damage (damage);
 					} else if (rig.position.y < player.position.y) {
-						if (hit_up.collider == null) {
+						if (hit_up.collider == null)
 							move = Vector2.up;
-							//flipCheck = true;
-						}
+						else if (hit_up.collider.GetComponent<Player> () != null)
+							hit_up.collider.GetComponent<Player> ().Damage (damage);
 					}
 				}
 			} else if (rig.position.x < player.position.x) {
-				if (hit_right.collider == null) {
+				if (hit_right.collider == null)
 					move = Vector2.right;
-					//flipCheck = false;
-				}
+				else if (hit_right.collider.GetComponent<Player> () != null)
+					hit_right.collider.GetComponent<Player> ().Damage (damage);
 				else {
 					if (rig.position.y > player.position.y) {
-						if (hit_down.collider == null) {
+						if (hit_down.collider == null)
 							move = Vector2.down;
-							//flipCheck = true;
-						}
+						else if (hit_down.collider.GetComponent<Player> () != null)
+							hit_down.collider.GetComponent<Player> ().Damage (damage);
 					} else if (rig.position.y < player.position.y) {
-						if (hit_up.collider == null) {
+						if (hit_up.collider == null)
 							move = Vector2.up;
-							//flipCheck = true;
-						}
+						else if (hit_up.collider.GetComponent<Player> () != null)
+							hit_up.collider.GetComponent<Player> ().Damage (damage);
 					}
 				}
-			}
-			else {
-				if (rig.position.y > player.position.y) {
-					if (hit_down.collider == null) {
-						move = Vector2.down;
-						//flipCheck = true;
-					}
-				} else if (rig.position.y < player.position.y) {
-					if (hit_up.collider == null) {
+			} else {
+				if (rig.position.y < player.position.y) {
+					if (hit_up.collider == null)
 						move = Vector2.up;
-						//flipCheck = true;
-					}
+					else if (hit_up.collider.GetComponent<Player> () != null)
+						hit_up.collider.GetComponent<Player> ().Damage (damage);
+				} else if (rig.position.y > player.position.y) {
+					if (hit_down.collider == null)
+						move = Vector2.down;
+					else if (hit_down.collider.GetComponent<Player> () != null)
+						hit_down.collider.GetComponent<Player> ().Damage (damage);
 				}
 			}
 		} else {
-			if (rig.position.y > player.position.y) {
-				if (hit_down.collider == null) {
-					move = Vector2.down;
-					//flipCheck = true;
-				}
-				else {
-					if (rig.position.x > player.position.x) {
-						if (hit_left.collider == null) {
-							move = Vector2.left;
-							//flipCheck = false;
-						}
-					} else if (rig.position.x < player.position.x) {
-						if (hit_right.collider == null) {
-							move = Vector2.right;
-							//flipCheck = false;
-						}
-					}
-				}
-			}
-			else if (rig.position.y < player.position.y) {
-				if (hit_up.collider == null) {
+			if (rig.position.y < player.position.y) {
+				if (hit_up.collider == null)
 					move = Vector2.up;
-					//flipCheck = true;
-				}
+				else if (hit_up.collider.GetComponent<Player> () != null)
+					hit_up.collider.GetComponent<Player> ().Damage (damage);
 				else {
-					if (rig.position.x > player.position.x) {
-						if (hit_left.collider == null) {
-							move = Vector2.left;
-							//flipCheck = false;
-						}
-					} else if (rig.position.x < player.position.x) {
-						if (hit_right.collider == null) {
+					if (rig.position.x < player.position.x) {
+						if (hit_right.collider == null)
 							move = Vector2.right;
-							//flipCheck = false;
-						}
+						else if (hit_right.collider.GetComponent<Player> () != null)
+							hit_right.collider.GetComponent<Player> ().Damage (damage);
+					} else if (rig.position.x > player.position.x) {
+						if (hit_left.collider == null)
+							move = Vector2.left;
+						else if (hit_left.collider.GetComponent<Player> () != null)
+							hit_left.collider.GetComponent<Player> ().Damage (damage);
 					}
 				}
-			}
-			else {
-				if (rig.position.x > player.position.x) {
-					if (hit_left.collider == null) {
-						move = Vector2.left;
-						//flipCheck = false;
+			} else if (rig.position.y > player.position.y) {
+				if (hit_down.collider == null)
+					move = Vector2.down;
+				else if (hit_down.collider.GetComponent<Player> () != null)
+					hit_down.collider.GetComponent<Player> ().Damage (damage);
+				else {
+					if (rig.position.x < player.position.x) {
+						if (hit_right.collider == null)
+							move = Vector2.right;
+						else if (hit_right.collider.GetComponent<Player> () != null)
+							hit_right.collider.GetComponent<Player> ().Damage (damage);
+					} else if (rig.position.x > player.position.x) {
+						if (hit_left.collider == null)
+							move = Vector2.left;
+						else if (hit_left.collider.GetComponent<Player> () != null)
+							hit_left.collider.GetComponent<Player> ().Damage (damage);
 					}
-				} else if (rig.position.x < player.position.x) {
-					if (hit_right.collider == null) {
+				}
+			} else {
+				if (rig.position.x < player.position.x) {
+					if (hit_right.collider == null)
 						move = Vector2.right;
-						//flipCheck = false;
-					}
+					else if (hit_right.collider.GetComponent<Player> () != null)
+						hit_right.collider.GetComponent<Player> ().Damage (damage);
+				} else if (rig.position.x > player.position.x) {
+					if (hit_left.collider == null)
+						move = Vector2.left;
+					else if (hit_left.collider.GetComponent<Player> () != null)
+						hit_left.collider.GetComponent<Player> ().Damage (damage);
 				}
 			}
 		}

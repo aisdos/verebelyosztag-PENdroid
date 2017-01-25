@@ -215,5 +215,7 @@ public class Player : MonoBehaviour {
             hit.collider.GetComponent<EnemyBase>().Damage(1);
         else if (hit.collider.GetComponent<Chest>() != null)
             hit.collider.GetComponent<Chest>().Open();
+		else if (hit.collider.GetComponent<Door>() != null)
+			hit.collider.GetComponent<Door>().Open();
     }
 }
