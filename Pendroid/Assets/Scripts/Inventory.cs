@@ -37,20 +37,31 @@ public class Inventory : MonoBehaviour {
 			Destroy (g);
 		}
 		int j = 0;
+		int k = 0;
+		bool unusableExist = false;
+		foreach (Item i in items) {
+			if (i.type != ItemType.potion)
+				unusableExist = true;
+		}
 		foreach (Item i in items) {
 			GameObject tmp;
 			if (i.type == ItemType.potion) {
 				tmp = Instantiate (_itemIcon_usable, Vector2.zero, Quaternion.identity, _hud.transform);
-				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (32 + j * 64, -32);
+				if (unusableExist)
+					tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (96, -32 - k * 64);
+				else
+					tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (32, -32 - k * 64);
 				tmp.gameObject.GetComponent<Button> ().onClick.AddListener (() => {
 					if (GetItemAmount(ItemType.potion) > 0) {
 						_player.Heal (4);
 						RemoveItem(ItemType.potion,1);
 					}
 				});
+				k++;
 			} else {
 				tmp = Instantiate (_itemIcon, Vector2.zero, Quaternion.identity, _hud.transform);
-				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (32 + j * 64, -32);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (32, -32 - j * 64);
+				j++;
 			}
 			tmp.GetComponentInChildren<Text> ().text = i.amount + "x";
 			if (GetItemImage (i.type).anim != null) {
@@ -58,7 +69,7 @@ public class Inventory : MonoBehaviour {
 			} else {
 				tmp.transform.FindChild("Image").GetComponent<Image> ().sprite = GetItemImage (i.type).icon;
 			}
-			j++;
+
 		}
 	}
 

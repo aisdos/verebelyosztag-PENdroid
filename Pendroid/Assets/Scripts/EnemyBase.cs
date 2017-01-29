@@ -56,6 +56,8 @@ public class EnemyBase : MonoBehaviour {
 	}
 
 	IEnumerator FirstMove() {
+		while (GameManager.Pause ())
+			yield return null;
 		yield return new WaitForSeconds (Rythm.BeginDelay);
 		if (type == MobType.Follow)
 			StartCoroutine (Follow ());
@@ -69,6 +71,8 @@ public class EnemyBase : MonoBehaviour {
 	//		Pattogás jobbra-balra
 	//
 	IEnumerator LeftRight() {
+		while (GameManager.Pause ())
+			yield return null;
 		Vector2 move = Vector2.zero;
 		if (!flipCheck) {
 			if (lastMove == Vector2.zero)
@@ -93,6 +97,21 @@ public class EnemyBase : MonoBehaviour {
 			lastMove = move;
 		rig.MovePosition (rig.position + move);
 
+		//
+		//		Sebzés ha ugrás után elé állsz
+		//
+		if (move == Vector2.left) {
+			if (hit_left.collider != null) {
+				if (hit_left.collider.GetComponent<Player> () != null)
+					hit_left.collider.GetComponent<Player> ().Damage (damage);
+			}
+		} else if (move == Vector2.right) {
+			if (hit_right.collider != null) {
+				if (hit_right.collider.GetComponent<Player> () != null)
+					hit_right.collider.GetComponent<Player> ().Damage (damage);
+			}
+		}
+
 		yield return new WaitForSeconds (Rythm.BeatDelay);
 		StartCoroutine (LeftRight ());
 	}
@@ -101,6 +120,8 @@ public class EnemyBase : MonoBehaviour {
 	//		Pattogás előre-hátra
 	//
 	IEnumerator ForBack() {
+		while (GameManager.Pause ())
+			yield return null;
 		Vector2 move = Vector2.zero;
 		if (!flipCheck) {
 			if (lastMove == Vector2.zero)
@@ -125,6 +146,21 @@ public class EnemyBase : MonoBehaviour {
 			lastMove = move;
 		rig.MovePosition (rig.position + move);
 
+		//
+		//		Sebzés ha ugrás után elé állsz
+		//
+		if (move == Vector2.up) {
+			if (hit_up.collider != null) {
+				if (hit_up.collider.GetComponent<Player> () != null)
+					hit_up.collider.GetComponent<Player> ().Damage (damage);
+			}
+		} else if (move == Vector2.down) {
+			if (hit_down.collider != null) {
+				if (hit_down.collider.GetComponent<Player> () != null)
+					hit_down.collider.GetComponent<Player> ().Damage (damage);
+			}
+		}
+
 		yield return new WaitForSeconds (Rythm.BeatDelay);
 		StartCoroutine (ForBack ());
 	}
@@ -134,6 +170,8 @@ public class EnemyBase : MonoBehaviour {
 	//		NE KÉRDEZD HOGY DE MŰKÖDIK!!! - Norbi
 	//
 	IEnumerator Follow() {
+		while (GameManager.Pause ())
+			yield return null;
 		Vector2 move = Vector2.zero;
 		if (lastMove == Vector2.up || lastMove == Vector2.down && rig.position.x != player.position.x)
 			flipCheck = true;

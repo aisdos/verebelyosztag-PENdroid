@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+	[SerializeField] private GameObject loading;
     [SerializeField] private GameObject[] menus;
     [SerializeField] private Button main_play;
     [SerializeField] private Button main_settings;
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
     {
         main_play.onClick.AddListener(() =>
         {
+			loading.SetActive(true);
             SceneManager.LoadScene(1);
         });
         main_settings.onClick.AddListener(() =>

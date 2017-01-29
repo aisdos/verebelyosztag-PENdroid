@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
 		//	Mégha ez itt működne - Norbi
 		//	Már működik - Norbi
 		//
-		if (!anim.GetCurrentAnimatorStateInfo (0).IsName("idle_left") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_down") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_up"))
+		if (!anim.GetCurrentAnimatorStateInfo (0).IsName("idle_left") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_forward") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_backward") && !anim.GetCurrentAnimatorStateInfo (0).IsName("idle_right"))
 			anim.SetBool ("move", false);
 		
 		//
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour {
 	//		GameOver
 	//
 	public void Die() {
-		UIManager.DeadUI ();
+		UIManager.SwitchUI("Dead");
 		sprite.SetActive (false);
 		gameObject.GetComponent<BoxCollider2D> ().enabled = false;
 	}
@@ -140,18 +140,21 @@ public class Player : MonoBehaviour {
 			}
 			for (j = 0; j < (maxHealth - tmpHealth) / 2; j++) {
 				GameObject tmp = (GameObject)Instantiate (health_0, Vector2.zero, Quaternion.identity, healthBar.transform);
-				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				//tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24, -72 - i * 48);
 				i++;
 			}
 			if (needHalf) {
 				GameObject tmp = (GameObject)Instantiate (health_1, Vector2.zero, Quaternion.identity, healthBar.transform);
-				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				//tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24, -72 - i * 48);
 				i++;
 				tmpHealth -= 2;
 			}
 			for (j = 0; j < tmpHealth / 2; j++) {
 				GameObject tmp = (GameObject)Instantiate (health_2, Vector2.zero, Quaternion.identity, healthBar.transform);
-				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				//tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24 - i * 48, -24);
+				tmp.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-24, -72 - i * 48);
 				i++;
 			}
 		} else {
@@ -167,53 +170,52 @@ public class Player : MonoBehaviour {
 	//		Mozgás
 	//
 	void Move(int dir) {
-		if (health > 0) {
-			Vector2 move = Vector2.zero;
-			if (Rythm.step && !Rythm.steppedInBeat) {
-				if (dir != 3) {
+		if (!GameManager.Pause ()) {
+			if (health > 0) {
+				Vector2 move = Vector2.zero;
+				if (Rythm.step && !Rythm.steppedInBeat) {
 					if (dir != 0) {
-						sprite.transform.rotation = Quaternion.Euler (0, 0, 0);
 						anim.SetInteger ("dir", dir);
 						anim.SetBool ("move", true);
 
 						if (dir == 1) {
-	                        if (hit_left.collider == null)
-	                            move = Vector2.left;
-	                        else
-	                            CheckHit(hit_left);
-	                    } else if (dir == 2) {
-	                        if (hit_up.collider == null)
-	                            move = Vector2.up;
-	                        else
-	                            CheckHit(hit_up);
+							if (hit_left.collider == null)
+								move = Vector2.left;
+							else
+								CheckHit (hit_left);
+						} else if (dir == 2) {
+							if (hit_up.collider == null)
+								move = Vector2.up;
+							else
+								CheckHit (hit_up);
+						} else if (dir == 3) {
+							if (hit_right.collider == null)
+								move = Vector2.right;
+							else
+								CheckHit (hit_right);
 						} else if (dir == 4) {
-	                        if (hit_down.collider == null)
-	                            move = Vector2.down;
-	                        else
-	                            CheckHit(hit_down);
-	                    }
+							if (hit_down.collider == null)
+								move = Vector2.down;
+							else
+								CheckHit (hit_down);
+						}
+					}
+
+					if (Rythm.earlyStep) {
+						Rythm.judge.text = "Great";
+						Rythm.judge.color = Color.green;
+					} else {
+						Rythm.judge.text = "Fantastic";
+						Rythm.judge.color = Color.blue;
 					}
 				} else {
-					sprite.transform.rotation = Quaternion.Euler (0, 180, 0);
-					anim.SetInteger ("dir", 1);
-					anim.SetBool ("move", true);
-
-	                if (hit_right.collider == null)
-	                    move = Vector2.right;
-	                else
-	                    CheckHit(hit_right);
+					Rythm.judge.text = "Miss";
+					Rythm.judge.color = Color.red;
 				}
 
-				if (Rythm.earlyStep)
-					Rythm.judge.text = "Great";
-				else
-					Rythm.judge.text = "Fantastic";
+				Rythm.steppedInBeat = true;
+				rig.MovePosition (rig.position + move);
 			}
-			else
-				Rythm.judge.text = "Miss";
-
-			Rythm.steppedInBeat = true;
-			rig.MovePosition (rig.position + move);
 		}
 	}
 

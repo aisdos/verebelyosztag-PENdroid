@@ -14,6 +14,8 @@ public class Rythm : MonoBehaviour {
 	[SerializeField] private float beatDelay = 1;
 	[SerializeField] private Image indicator;
 	[SerializeField] private Text _judge;
+	[SerializeField] private float stepAmount = 0.75f;
+	[SerializeField] private float earlyStepAmount = 0.20f;
 	public static Text judge;
 	public static float BeginDelay;
 	public static float BeatDelay;				//	Just For Fun 
@@ -32,25 +34,29 @@ public class Rythm : MonoBehaviour {
 	}
 
 	void Update() {
-		toNextBeat -= Time.deltaTime;
-		if (toNextBeat < 0) {
-			toNextBeat = beatDelay;
-			if (!steppedInBeat) 
-				judge.text = "Skipped";
-			steppedInBeat = false;
+		if (!GameManager.Pause ()) {
+			toNextBeat -= Time.deltaTime;
+			if (toNextBeat < 0) {
+				toNextBeat = beatDelay;
+				if (!steppedInBeat) {
+					judge.text = "Skipped";
+					judge.color = Color.yellow;
+				}
+				steppedInBeat = false;
+			}
+
+			indicatorFillAmount = (toNextBeat / beatDelay);
+			indicator.fillAmount = indicatorFillAmount;
+
+			if (indicatorFillAmount <= stepAmount) {
+				step = true;
+				if (indicatorFillAmount <= stepAmount && indicatorFillAmount >= earlyStepAmount)
+					earlyStep = true;
+				else
+					earlyStep = false;
+			} else
+				step = false;
 		}
-
-		indicatorFillAmount = (toNextBeat / beatDelay);
-		indicator.fillAmount = indicatorFillAmount;
-
-		if (indicatorFillAmount <= 0.75f) {
-			step = true;
-			if (indicatorFillAmount <= 0.75f && indicatorFillAmount >= 0.20f)
-				earlyStep = true;
-			else
-				earlyStep = false;
-		} else
-			step = false;
 	}
 
 	public static float NextBeat() {
