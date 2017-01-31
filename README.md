@@ -26,7 +26,7 @@ Menű:
 
 Játékmenet:	
 
-történet: 	Ardmore hadjáratott indított a felszín ellen...A király csapatai sikeresen vissza verték a támadásokat,
+történet: 	Ardmore, a pokol ura hadjáratott indított a felszín ellen.A király csapatai sikeresen vissza verték a támadásokat,
  de az ellenséges seregek egyre erősebbek...Reménnyel telve indultál el kalandodra, és elszántan fogsz harcolni a birodalom megmentéséért. Ardmore rejtekhelye felé vetted az irányt, feladatod a gonosz száműzése ebből a világból örökre.
 							
 Ardmore halála után: Ardmore elesett, a birodalom újra felvirágozhat a Te jóvoltadból. Hős tettedet sosem felejtik majd el.
