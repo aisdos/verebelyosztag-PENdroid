@@ -3,26 +3,17 @@
 Képek amik kellenek majd előre láthatólag:	
 
 							        -Ardmore kardja	;			
-							        -vas vért(páncél) ;
-								-gyógyítóka(hp re. gen.) ;
-								-varázsitóka(+hp x időre)  ;
 								-5 féle elenfél + 1 fő boss, valami mitológiai lény lehetne mondjuk, sárkány vagy idk. ;
-								-szinteknek megfelelő falak ;
 								-ajtó a szintről való kijutáshoz ;
 								-itt fal törés helyett kulcsok + ajtók a kincses ládákhoz stb ;
-								-hp teli/üres/fél ;
 								-akadályok ;
 								-inventory valahova(négyszögek abba mennek bele az ikonok(varázsítóka,
 								gyógyítóka -> arra katt felhasznál ekkor neked 2mp szünet még megissza 
 								
 								()+ valami effect a képernyőre))) ;
-								-kincses láda(+ütés, +hp, varázsítóka, gyógyítóka)
 								-pause gomb(folytatás, kilépés) ;
 								-minimap
 								
-Animációk:
-
-		Lehetőleg mindent animáljunk amit csak tudunk.
 			
 Menű:	
 	
@@ -35,22 +26,8 @@ Menű:
 
 Játékmenet:	
 
-			-1: 	történet: 	Ardmore és hű segítője, hadjáratott inditottak a föld ellen...Szövetséges csapataid sikeresen feltartoztatják
-								őket már vagy 2 hónapja, de már nem bírják sokáig...A király parancsára, eredj a szúrdokhoz, ahol le merészkedhetsz a pokolba.
-								Ez után 2 napi járásra a föld  alja felé, találkozni fogsz egy táborral...Ott kérhetsz majd pár bajtársat...
-								Velik eredj le Ardmore barlangába, és végezz vele, vagy a királyság...Az ország...A világ elveszik, és e szörnyeteg keze közé kerül..
-								
+történet: 	Ardmore hadjáratott indított a felszín ellen...A király csapatai sikeresen vissza verték a támadásokat,
+ de az ellenséges seregek egyre erősebbek...Reménnyel telve indultál el kalandodra, és elszántan fogsz harcolni a birodalom megmentéséért. Ardmore rejtekhelye felé vetted az irányt, feladatod a gonosz száműzése ebből a világból örökre.
 							
-			-2: 	Történet:	A bajtársaid már mind elestek a a csatába...De te nem állhatsz meg..Tovább kell mened vagy a föld elpusztul!
-					100hp 0 armor
-					
-					összesen 5db random generált világ a végén a nagy csata egy viszonylag nyílt világban.
-					 100+hp-t és 100armort
-					
-					Út: felszínről -> pokolba e szerint a szintek styla is
-							
-			
-			-3:		
-					történet vége:	Ardmore, és társai halottak...A világ megmenekült, téged ki tüntetnek, és regéket fognak rólad írni.Ne feledd ezt a napot
-									mikor végeztél Ardmorral...
+Ardmore halála után: Ardmore elesett, a birodalom újra felvirágozhat a Te jóvoltadból. Hős tettedet sosem felejtik majd el.
 									
