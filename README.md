@@ -2,8 +2,6 @@
 
 Képek amik kellenek majd előre láthatólag:	
 
-							        -Ardmore kardja	;			
-								-5 féle elenfél + 1 fő boss, valami mitológiai lény lehetne mondjuk, sárkány vagy idk. ;
 								-ajtó a szintről való kijutáshoz ;
 								-itt fal törés helyett kulcsok + ajtók a kincses ládákhoz stb ;
 								-akadályok ;
