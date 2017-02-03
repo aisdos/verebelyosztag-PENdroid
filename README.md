@@ -29,14 +29,14 @@ történet: 	Ardmore, a pokol ura hadjáratott indított a felszín ellen. A kir
 							
 Ardmore halála után: Ardmore elesett, a birodalom újra felvirágozhat a Te jóvoltadból. Hős tettedet sosem felejtik majd el.
 									
-----Credits----
-*kép rólunk*
--Crypt of Ardmore-
--Készítők-
-Horváth Norbert - programozó
-Szalai Attila - programozó
-Szabó Kristóf - programozó
-Kővágó Dávid - grafikus
+	----Credits----
+	*kép rólunk*
+	-Crypt of Ardmore-
+	-Készítők-
+	Horváth Norbert - programozó
+	Szalai Attila - programozó
+	Szabó Kristóf - programozó
+	Kővágó Dávid - grafikus
 
 
 
