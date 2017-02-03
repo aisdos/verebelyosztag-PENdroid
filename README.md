@@ -28,6 +28,12 @@ történet: 	Ardmore, a pokol ura hadjáratott indított a felszín ellen. A kir
  de az ellenséges seregek egyre erősebbek. Reménnyel telve indultál el kalandodra, és elszántan fogsz harcolni a birodalom megmentéséért. Ardmore rejtekhelye felé vetted az irányt, feladatod a gonosz száműzése ebből a világból örökre.
 							
 Ardmore halála után: Ardmore elesett, a birodalom újra felvirágozhat a Te jóvoltadból. Hős tettedet sosem felejtik majd el.
+
+
+
+Angol: Ardmore, the lord of hell was started a war against the surface. The king's armies successfully repel the attacks, but the enemy army is getting stronger. You have started your adventure with full of hope, and You will fight unhesitatingly for the save of the empire. You headed to Ardmore's hideout, your quest is you need to banish the evil from this world ever.
+
+Ardmore halála után: Ardmore is fallen, the empire will rise again by Your goodness. Your story will never be forgotten.
 									
 	----Credits----
 	*kép rólunk*
